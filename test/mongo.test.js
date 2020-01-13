@@ -1,15 +1,9 @@
-const chai = require('chai');
-const expect = chai.expect;
-const request = require('supertest');
-const app = require('../server/app');
+
 const mongoose = require('mongoose');
-
-
-
-// describe('DataBase Connection', () => {
-//     it('connection to database', (done) => {
-//         if (mongoose.connection.readyState == 1) {
-//             done();
-//         }
-//     });
-// });
+const db = mongoose.connection;
+const User = require('../server/api/models/user')
+describe('DataBase Connection', () => {
+    it('connection to database', (done) => {
+        User.find({}).limit(10).then(() => { return done(); })
+    })
+});
