@@ -2,9 +2,10 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const validator = require('../middlewares/validator');
 const mongoose = require('mongoose');
+const logger = require('../middlewares/logger');
 
 module.exports.signup = async (req, res, next) => {
-
+    logger.signupLogger(req);
     if (process.env.NODE_ENV == 'production ') { //! space akharesh moheme |:
         await validator.signupValidator(req)
             .then(requestBody => {
