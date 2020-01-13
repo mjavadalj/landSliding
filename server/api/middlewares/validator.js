@@ -4,7 +4,7 @@ const schema = joi.object({
     username: joi.string()
         .alphanum()
         .min(4)
-        .max(15)
+        .max(30)
         .required(),
     password: joi.string()
         .pattern(new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{4,})")),
@@ -16,8 +16,8 @@ const schema = joi.object({
 }).with('password', 'confirmPassword');
 
 
-module.exports.signupValidator = async (req) =>
-    await schema.validateAsync({
+module.exports.signupValidator = (req) =>
+    schema.validateAsync({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,

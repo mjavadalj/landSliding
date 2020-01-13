@@ -4,10 +4,13 @@ const validator = require('../middlewares/validator');
 const mongoose = require('mongoose');
 const logger = require('../middlewares/logger');
 
-module.exports.signup = async (req, res, next) => {
+module.exports.signup = (req, res, next) => {
     logger.signupLogger(req);
-    if (process.env.NODE_ENV == 'production ') { //! space akharesh moheme |:
-        await validator.signupValidator(req)
+
+    if (process.env.NODE_ENV == 'production ' || process.env.NODE_ENV == 'test ') { //! space akharesh moheme |:
+
+        validator.signupValidator(req)
+
             .then(requestBody => {
                 User.find({ email: requestBody.email })
                     .then(findResult => {
@@ -19,9 +22,7 @@ module.exports.signup = async (req, res, next) => {
                         else if (findResult.length == 0) {
                             bcrypt.hash(requestBody.password, 10)
                                 .then(hashedPassword => {
-
-                                    console.log(hashedPassword, requestBody);
-                                    const user = new User({
+                                    new User({
                                         _id: mongoose.Types.ObjectId(),
                                         username: requestBody.username,
                                         password: hashedPassword,
@@ -41,7 +42,6 @@ module.exports.signup = async (req, res, next) => {
                                         })
                                 })
                                 .catch(hashError => {
-                                    console.log(hashError, requestBody);
                                     return res.status(500).json({
                                         message: "hashing password internal error",
                                         error: hashError
