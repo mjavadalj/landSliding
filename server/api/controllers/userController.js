@@ -118,7 +118,7 @@ module.exports.login = (req, res) => {
                                     message: "email or password is wrong"
                                 })
                             } else {
-                                req.login(user[0]._id).then(() => {
+                                req.login(user[0]).then(() => {
                                     return res.status(200).json({
                                         message: "login successful",
                                         user: user[0]
@@ -169,7 +169,7 @@ module.exports.login = (req, res) => {
                             message: "dev email or password is wrong"
                         })
                     } else {
-                        req.login(user[0]._id, (error) => {
+                        req.login(user[0], (error) => {
                             if (error) throw error;
                             return res.status(200).json({
                                 messgae: "login successful",
@@ -190,10 +190,10 @@ module.exports.login = (req, res) => {
 
 }
 
-passport.serializeUser(function (userId, done) {
-    done(null, userId);
+passport.serializeUser(function (user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function (userId, done) {
-    done(null, userId);
+passport.deserializeUser(function (user, done) {
+    done(null, user);
 });
