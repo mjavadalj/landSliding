@@ -26,5 +26,22 @@ describe('User Tests', () => {
                 return done();
             })
     });
+    it('Login test - should be successful', (done) => {
+        request(app).post('/api/user/login')
+            .send({ email: "javad1@test.com", password: "password1" })
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(200);
+                expect(res.body.info).to.exist;
+                return done();
+            })
+    });
 
+    it('Login test - should be failed', (done) => {
+        request(app).post('/api/user/login')
+            .send({ email: `javad${Math.floor(Math.random() * 100)}@test.com`, password: "password1" })
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(400);
+                return done();
+            })
+    });
 })
