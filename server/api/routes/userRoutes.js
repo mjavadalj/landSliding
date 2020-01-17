@@ -1,9 +1,16 @@
 const router = require('express').Router();
 const userController = require('../controllers/userController');
-const authentication = require('../middlewares/authentication');
+
 
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
+
+
+
+
+// * just for test
+
+
 router.get('/get', (req, res) => {
 
     console.log(req.user);
@@ -11,6 +18,5 @@ router.get('/get', (req, res) => {
     console.log(req.isAuthenticated());
     return res.status(200);
 });
-
 
 module.exports = router;

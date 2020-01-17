@@ -22,6 +22,10 @@ const user = new Schema({
         type: String,
         required: [true, 'password is required']
     },
+    requests: [{
+        type: objectId,
+        ref: 'Request'
+    }]
 });
 
 module.exports = mongoose.model('User', user);

@@ -7,6 +7,7 @@ const request = new Schema({
         type: objectId,
         required: true
     },
+    user: { type: objectId, ref: 'User' },
     title: {
         type: String,
         enum: ['typeOne', 'typeTwo'], //esmaro ok kon
