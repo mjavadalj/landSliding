@@ -6,7 +6,6 @@
   "scripts": {
     "start": "set NODE_ENV=production && node ./server/server.js",
     "dev": "set NODE_ENV=development && nodemon ./server/server.js",
-    "database": "node ./test/databaseinittest",
     "test": "set NODE_ENV=test && mocha"
   },
   "author": "",
