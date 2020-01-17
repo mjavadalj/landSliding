@@ -2,8 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const validator = require('../middlewares/validator');
 const mongoose = require('mongoose');
-const passport = require('passport');
-
+require('../middlewares/passportSession');
 module.exports.signup = (req, res, next) => {
 
     if (process.env.NODE_ENV == 'production ' || process.env.NODE_ENV == 'test ') { //! space akharesh moheme |:
@@ -181,11 +180,3 @@ module.exports.login = (req, res) => {
     }
 
 }
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
