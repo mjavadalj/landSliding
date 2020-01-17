@@ -1,6 +1,5 @@
 const mongoos = require('mongoose');
 const Request = require('../models/request');
-const logger = require('../middlewares/logger');
 
 
 

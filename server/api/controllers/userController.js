@@ -2,11 +2,9 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const validator = require('../middlewares/validator');
 const mongoose = require('mongoose');
-const logger = require('../middlewares/logger');
 const passport = require('passport');
 
 module.exports.signup = (req, res, next) => {
-    logger.signupLogger(req);
 
     if (process.env.NODE_ENV == 'production ' || process.env.NODE_ENV == 'test ') { //! space akharesh moheme |:
 
@@ -101,7 +99,6 @@ module.exports.signup = (req, res, next) => {
 
 
 module.exports.login = (req, res) => {
-    logger.loginLogger(req);
     if (process.env.NODE_ENV == "production " || process.env.NODE_ENV == "test ") {
         User.find({ email: req.body.email })
             .then(user => {

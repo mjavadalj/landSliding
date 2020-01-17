@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const userController = require('../controllers/userController');
+const logger = require('../middlewares/logger');
 
-
-router.post('/signup', userController.signup);
-router.post('/login', userController.login);
+router.post('/signup', logger.userLogger, userController.signup);
+router.post('/login', logger.userLogger, userController.login);
 
 
 
