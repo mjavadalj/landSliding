@@ -115,18 +115,13 @@ module.exports.login = (req, res) => {
                                     message: "email or password is wrong"
                                 })
                             } else {
-                                req.login(user[0]).then(() => {
+                                req.login(user[0], (error) => {
+                                    if (error) throw error;
                                     return res.status(200).json({
                                         message: "login successful",
                                         user: user[0]
                                     })
                                 })
-                                    .catch(passportLoginFailed => {
-                                        return res.status(500).json({
-                                            message: "passport login failed",
-                                            error: passportLoginFailed
-                                        })
-                                    })
 
                             }
                         })

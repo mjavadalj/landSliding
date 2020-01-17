@@ -28,10 +28,10 @@ describe('User Tests', () => {
     });
     it('Login test - should be successful', (done) => {
         request(app).post('/api/user/login')
-            .send({ email: "javad1@test.com", password: "password1" })
+            .send(data.loginUser)
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200);
-                expect(res.body.info).to.exist;
+                expect(res.body.message).to.exist;
                 return done();
             })
     });
