@@ -180,3 +180,9 @@ module.exports.login = (req, res) => {
     }
 
 }
+
+module.exports.getUser = (req, res) => {
+    return res.status(200).json({
+        user: req.user
+    })
+}
