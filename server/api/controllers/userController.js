@@ -185,4 +185,53 @@ module.exports.getUser = (req, res) => {
     return res.status(200).json({
         user: req.user
     })
-}
+};
+
+
+module.exports.getUserRequests = (req, res) => {
+    // const outputRequests = [];
+    User.find({ _id: req.user._id })
+        .lean()
+        .populate('requests')
+        .exec()
+        .then((users) => {
+            // requests.map((request => {
+            //     outputRequests.push(request);
+            // }));
+            return res.status(200).json({
+                message: "getting user's request successful",
+                requests: users[0].requests
+            })
+        })
+        .catch(err => {
+            return res.status(500).json({
+                message: "getting user's request failed",
+                err
+            })
+        });
+};
+
+
+
+module.exports.devGetUserRequests = (req, res) => {
+    const outputRequests = [];
+    User.find({ _id: req.user._id })
+        .lean()
+        .populate('requests')
+        .exec()
+        .then((users) => {
+            // requests.map((request => {
+            //     outputRequests.push(request);
+            // }));
+            return res.status(200).json({
+                message: "dev getting user's request successful",
+                requests: users[0].requests
+            })
+        })
+        .catch(err => {
+            return res.status(500).json({
+                message: "dev getting user's request failed",
+                err
+            })
+        });
+};

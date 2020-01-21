@@ -32,28 +32,6 @@ module.exports.addRequest = (req, res) => {
 };
 
 
-module.exports.getUserRequests = (req, res) => {
-    // const outputRequests = [];
-    User.find({ _id: req.user._id })
-        .lean()
-        .populate('requests')
-        .exec()
-        .then((users) => {
-            // requests.map((request => {
-            //     outputRequests.push(request);
-            // }));
-            return res.status(200).json({
-                message: "getting user's request successful",
-                requests: users[0].requests
-            })
-        })
-        .catch(err => {
-            return res.status(500).json({
-                message: "getting user's request failed",
-                err
-            })
-        });
-};
 
 module.exports.getRequest = (req, res) => {
     Request.findOne({ _id: req.body.requestId })
@@ -95,29 +73,6 @@ module.exports.devAddRequest = (req, res) => {
     });
 };
 
-
-module.exports.devGetUserRequests = (req, res) => {
-    const outputRequests = [];
-    Request.find({ user: req.body.userId })
-        .lean()
-        .populate('user', 'username')
-        .exec()
-        .then((requests) => {
-            requests.map((request => {
-                outputRequests.push(request);
-            }));
-            return res.status(200).json({
-                message: "getting user's request successful",
-                outputRequests
-            })
-        })
-        .catch(err => {
-            return res.status(500).json({
-                message: "getting user's request failed",
-                err
-            })
-        });
-};
 
 module.exports.devGetRequest = (req, res) => {
     Request.findOne({ _id: req.body.requestId })
