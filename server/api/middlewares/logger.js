@@ -23,7 +23,7 @@ const requestLog = bunyan.createLogger({
     streams: [{
         type: 'rotating-file',
         path: path.join(__dirname + "/../logs.log"),
-        period: '10d',
+        period: '1d',
     },
     {
         level: 'info',
